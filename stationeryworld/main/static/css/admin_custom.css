@@ -1,0 +1,277 @@
+/* Custom Admin CSS for Stationery World Uganda - Orange Theme */
+
+/* CSS Variables for Orange Theme */
+:root {
+    --primary-orange: #ff6b35;
+    --dark-orange: #e55a2b;
+    --light-orange: #ff8c61;
+    --gradient-orange: linear-gradient(135deg, #ff6b35 0%, #ff8c42 50%, #ffa726 100%);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --text-primary: #2c3e50;
+    --text-light: #ffffff;
+}
+
+/* Global Admin Styling */
+#header {
+    background: var(--gradient-orange);
+    color: white;
+    box-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
+}
+
+#header h1 a {
+    color: white !important;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+#header h1 span {
+    color: white !important;
+}
+
+/* Login Page Styling */
+.login #header {
+    background: var(--gradient-orange);
+    color: white;
+    box-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
+}
+
+.login #header h1 a {
+    color: white !important;
+}
+
+/* Navigation Buttons */
+.nav-global a {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-global a:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Welcome Message in Admin Index */
+.welcome-message {
+    background: var(--gradient-orange);
+    color: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.welcome-message h2 {
+    margin: 0;
+    color: white;
+}
+
+.welcome-message p {
+    margin: 10px 0 0 0;
+    color: white;
+    opacity: 0.9;
+}
+
+/* Model Tables */
+.module table {
+    width: 100%;
+}
+
+.module caption {
+    background: #f8f9fa;
+    padding: 10px;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.module th {
+    background: #f8f9fa;
+    padding: 10px;
+}
+
+.module tr:hover {
+    background: #f8f9fa;
+}
+
+/* Buttons */
+.button, input[type=submit], input[type=button], .submit-row input {
+    background: var(--gradient-orange);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.button:hover, input[type=submit]:hover, input[type=button]:hover, .submit-row input:hover {
+    background: var(--dark-orange);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+}
+
+/* Admin Breadcrumbs */
+.breadcrumbs {
+    background: rgba(255, 107, 53, 0.1);
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+    border-radius: 0 0 10px 10px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.breadcrumbs a {
+    color: var(--primary-orange);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.breadcrumbs a:hover {
+    color: var(--dark-orange);
+    text-decoration: none;
+    transform: translateX(3px);
+}
+
+/* Object Tools */
+.object-tools {
+    background: rgba(255, 107, 53, 0.05);
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 107, 53, 0.1);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.object-tools a {
+    background: var(--gradient-orange);
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-left: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+}
+
+.object-tools a:hover {
+    background: var(--dark-orange);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+}
+
+/* Module Tables with Orange Theme */
+.module {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+    margin-bottom: 20px;
+}
+
+.module table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.module caption {
+    background: var(--gradient-orange);
+    color: white;
+    padding: 15px 20px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: left;
+}
+
+.module th {
+    background: rgba(255, 107, 53, 0.1);
+    padding: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+.module td {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255, 107, 53, 0.1);
+}
+
+.module tr:hover {
+    background: rgba(255, 107, 53, 0.05);
+    transform: scale(1.01);
+    transition: all 0.3s ease;
+}
+
+/* Form styling improvements */
+.form-row {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+}
+
+.form-row label {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.form-row input, .form-row select, .form-row textarea {
+    border: 2px solid rgba(255, 107, 53, 0.2);
+    border-radius: 8px;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+}
+
+.form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+    outline: none;
+}
+
+/* Admin content wrapper */
+#content {
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    min-height: 100vh;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .module {
+        overflow-x: auto;
+    }
+    
+    .module table {
+        min-width: 600px;
+    }
+    
+    .login-card {
+        margin: 0 15px;
+        padding: 30px 25px;
+    }
+}

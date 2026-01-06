@@ -1,0 +1,161 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Services - Stationery World Uganda | Graphic Design, Printing, Electronics & Stationery{% endblock %}
+
+{% block meta_description %}Professional graphic design, printing, electronics and stationery services in Uganda. Logo design, business cards, banners, document printing and quality electronics.{% endblock %}
+
+{% block og_title %}Services - Stationery World Uganda | Graphic Design, Printing, Electronics & Stationery{% endblock %}
+{% block og_description %}Professional graphic design, printing, electronics and stationery services in Uganda. Logo design, business cards, banners, document printing and quality electronics.{% endblock %}
+{% block twitter_title %}Services - Stationery World Uganda | Graphic Design, Printing, Electronics & Stationery{% endblock %}
+{% block twitter_description %}Professional graphic design, printing, electronics and stationery services in Uganda. Logo design, business cards, banners, document printing and quality electronics.{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-4" style="color: var(--brand-color);">Our Services</h2>
+    
+    {% if services %}
+        <div class="row">
+            {% for service in services %}
+            <div class="col-lg-6 col-md-12 mb-5">
+                <div class="card h-100 shadow-sm border-0">
+                    <!-- Service Image Carousel -->
+                    {% if service.images.all %}
+                    <div id="carousel-{{ service.id }}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            {% for image in service.images.all %}
+                            <button type="button" data-bs-target="#carousel-{{ service.id }}" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></button>
+                            {% endfor %}
+                        </div>
+                        <div class="carousel-inner">
+                            {% for image in service.images.all %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ service.title }}" style="height: 250px; object-fit: cover;">
+                                {% if image.caption %}
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>{{ image.caption }}</h5>
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ service.id }}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ service.id }}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    {% else %}
+                    <!-- Fallback image if no images available -->
+                    <div class="bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
+                        <i class="fas fa-image fa-3x text-muted"></i>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Service Content -->
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: var(--brand-color);">{{ service.title }}</h5>
+                        <p class="card-text">{{ service.description }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="#contact" class="btn btn-brand scroll-link">
+                                <i class="fas fa-phone me-2"></i>Contact Us
+                            </a>
+                            <small class="text-muted">
+                                <i class="fas fa-images me-1"></i>
+                                {{ service.images.count }} image{{ service.images.count|pluralize }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- Fallback content if no services in database -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="p-4 border rounded shadow-sm mb-4">
+                    <h5>Printing & Photocopying</h5>
+                    <p>High-quality printing services for your office and personal needs.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-4 border rounded shadow-sm mb-4">
+                    <h5>Graphic Design</h5>
+                    <p>Professional design services for logos, flyers, banners, and more.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-4 border rounded shadow-sm mb-4">
+                    <h5>Stationery Supply</h5>
+                    <p>Wide range of office and school stationery at competitive prices.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-4 border rounded shadow-sm mb-4">
+                    <h5>Electronics</h5>
+                    <p>Quality electronics including printers, scanners, and office equipment.</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Custom CSS for service cards -->
+<style>
+.service-card {
+    transition: all 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+}
+
+.carousel-item img {
+    transition: transform 0.3s ease;
+}
+
+.carousel-item:hover img {
+    transform: scale(1.05);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: var(--brand-color);
+}
+
+.btn-brand {
+    background-color: var(--brand-color);
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-brand:hover {
+    background-color: #d6660a;
+    color: white;
+    transform: translateY(-2px);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Auto-advance carousels every 5 seconds
+    const carousels = document.querySelectorAll('.carousel');
+    carousels.forEach(carousel => {
+        const bsCarousel = new bootstrap.Carousel(carousel, {
+            interval: 5000,
+            wrap: true
+        });
+    });
+});
+</script>
+{% endblock %}

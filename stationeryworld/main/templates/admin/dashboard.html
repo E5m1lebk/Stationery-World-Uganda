@@ -1,0 +1,165 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 style="color: var(--brand-color);">Admin Dashboard</h2>
+                <a href="{% url 'admin_logout' %}" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Website Content Management -->
+        <div class="col-md-6">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <h4 style="color: var(--brand-color);">
+                        <i class="fas fa-edit me-2"></i>Website Content
+                    </h4>
+                    <p class="text-muted">Manage homepage content, descriptions, and text</p>
+                    <form method="post" action="{% url 'admin_update_content' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="welcome_title" class="form-label">Welcome Title</label>
+                            <input type="text" class="form-control" id="welcome_title" name="welcome_title" 
+                                   value="{{ content.welcome_title|default:'Welcome to Stationery World Uganda' }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="welcome_description" class="form-label">Welcome Description</label>
+                            <textarea class="form-control" id="welcome_description" name="welcome_description" rows="3">{{ content.welcome_description|default:'Your trusted partner in Stationery, Electronics, Phone Accessories, Graphic Designing & Printing' }}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="company_description" class="form-label">Company Description</label>
+                            <textarea class="form-control" id="company_description" name="company_description" rows="4">{{ content.company_description|default:'We provide quality stationery, electronics, and printing services to individuals and businesses across Uganda.' }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-brand">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="col-md-6">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <h4 style="color: var(--brand-color);">
+                        <i class="fas fa-phone me-2"></i>Contact Information
+                    </h4>
+                    <p class="text-muted">Update contact details and business information</p>
+                    <form method="post" action="{% url 'admin_update_contact' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" 
+                                   value="{{ contact.address|default:'Nabweru near playground, Wakiso, Uganda' }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="phone" name="phone" 
+                                   value="{{ contact.phone|default:'0200 901 914, +256 783 238 522' }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" 
+                                   value="{{ contact.email|default:'clericdesigns@gmail.com' }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="business_hours" class="form-label">Business Hours</label>
+                            <input type="text" class="form-control" id="business_hours" name="business_hours" 
+                                   value="{{ contact.business_hours|default:'Monday - Friday: 07:00 AM - 10:00 PM, Saturday & Sunday: 8:00 AM - 10:00 PM' }}">
+                        </div>
+                        <button type="submit" class="btn btn-brand">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Management -->
+        <div class="col-md-6">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <h4 style="color: var(--brand-color);">
+                        <i class="fas fa-cogs me-2"></i>Services
+                    </h4>
+                    <p class="text-muted">Update services information and descriptions</p>
+                    <form method="post" action="{% url 'admin_update_services' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="graphic_design_description" class="form-label">Graphic Design Description</label>
+                            <textarea class="form-control" id="graphic_design_description" name="graphic_design_description" rows="3">{{ services.graphic_design_description|default:'Professional graphic design services for all your branding and marketing needs.' }}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="printing_description" class="form-label">Printing Services Description</label>
+                            <textarea class="form-control" id="printing_description" name="printing_description" rows="3">{{ services.printing_description|default:'High-quality printing services for all your documents and marketing materials.' }}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="electronics_description" class="form-label">Electronics Description</label>
+                            <textarea class="form-control" id="electronics_description" name="electronics_description" rows="3">{{ services.electronics_description|default:'Quality electronics and accessories for all your technology needs.' }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-brand">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="col-md-6">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <h4 style="color: var(--brand-color);">
+                        <i class="fas fa-shopping-cart me-2"></i>Recent Orders
+                    </h4>
+                    <p class="text-muted">View recent customer orders</p>
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Customer</th>
+                                    <th>Quantity</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in recent_orders %}
+                                <tr>
+                                    <td>{{ order.product.name }}</td>
+                                    <td>{{ order.customer_name }}</td>
+                                    <td>{{ order.quantity }}</td>
+                                    <td>
+                                        <span class="badge bg-success">{{ order.payment.status }}</span>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center text-muted">No recent orders</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="/admin/main/order/" class="btn btn-outline-primary btn-sm">View All Orders</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success/Error Messages -->
+    {% if messages %}
+        <div class="row mt-3">
+            <div class="col-12">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

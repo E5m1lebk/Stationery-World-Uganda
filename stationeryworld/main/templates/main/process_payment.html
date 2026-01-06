@@ -1,0 +1,132 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Process Payment - {{ payment.order.product.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Complete Your Payment</h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <strong>Amount to Pay:</strong> UGX {{ payment.amount }}<br>
+                        <strong>Payment Method:</strong> {{ payment.payment_method.name }}<br>
+                        <strong>Transaction ID:</strong> {{ payment.transaction_id }}
+                    </div>
+
+                    {% if payment.payment_method.provider == 'mtn' or payment.payment_method.provider == 'airtel' %}
+                        <!-- Mobile Money Payment Form -->
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="phone_number" class="form-label">
+                                    {{ payment.payment_method.name }} Phone Number
+                                </label>
+                                <input type="tel" class="form-control" id="phone_number" name="phone_number" 
+                                       placeholder="e.g., 256701234567" required>
+                                <div class="form-text">
+                                    You will receive a prompt on your phone to complete the payment.
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">
+                                Pay UGX {{ payment.amount }} via {{ payment.payment_method.name }}
+                            </button>
+                        </form>
+                    
+                    {% elif payment.payment_method.provider == 'card' %}
+                        <!-- Card Payment Form -->
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="card_number" class="form-label">Card Number</label>
+                                    <input type="text" class="form-control" id="card_number" name="card_number" 
+                                           placeholder="1234 5678 9012 3456" maxlength="19" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="expiry_date" class="form-label">Expiry Date</label>
+                                    <input type="text" class="form-control" id="expiry_date" name="expiry_date" 
+                                           placeholder="MM/YY" maxlength="5" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="cvv" class="form-label">CVV</label>
+                                    <input type="text" class="form-control" id="cvv" name="cvv" 
+                                           placeholder="123" maxlength="4" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                Pay UGX {{ payment.amount }} via Card
+                            </button>
+                        </form>
+                    
+                    {% elif payment.payment_method.provider == 'bank' %}
+                        <!-- Bank Transfer Instructions -->
+                        <div class="alert alert-warning">
+                            <h5>Bank Transfer Instructions</h5>
+                            <p>Please transfer the amount to our bank account:</p>
+                            <ul>
+                                <li><strong>Bank:</strong> Centenary Bank</li>
+                                <li><strong>Account Name:</strong> Stationery World Uganda Ltd</li>
+                                <li><strong>Account Number:</strong> 3001201234567</li>
+                                <li><strong>Amount:</strong> UGX {{ payment.amount }}</li>
+                                <li><strong>Reference:</strong> {{ payment.transaction_id }}</li>
+                            </ul>
+                            <p>After making the transfer, please contact us with your payment confirmation.</p>
+                        </div>
+                        <div class="text-center">
+                            <a href="tel:+256700123456" class="btn btn-success me-2">
+                                Call to Confirm Payment
+                            </a>
+                            <a href="mailto:payments@stationeryworld.com" class="btn btn-info">
+                                Email Confirmation
+                            </a>
+                        </div>
+                    
+                    {% elif payment.payment_method.provider == 'cash' %}
+                        <!-- Cash on Delivery -->
+                        <div class="alert alert-success">
+                            <h5>Cash on Delivery</h5>
+                            <p>Your order has been confirmed for cash on delivery.</p>
+                            <ul>
+                                <li><strong>Amount to Pay:</strong> UGX {{ payment.amount }}</li>
+                                <li><strong>Delivery Address:</strong> You will be contacted to confirm delivery details</li>
+                                <li><strong>Payment:</strong> Pay cash upon delivery</li>
+                            </ul>
+                        </div>
+                        <div class="text-center">
+                            <a href="{% url 'home' %}" class="btn btn-success">
+                                Continue Shopping
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+// Format card number input
+document.getElementById('card_number').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+    let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+    e.target.value = formattedValue;
+});
+
+// Format expiry date input
+document.getElementById('expiry_date').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length >= 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+    }
+    e.target.value = value;
+});
+</script>
+{% endblock %}
+{% endblock %}

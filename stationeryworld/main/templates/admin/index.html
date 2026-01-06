@@ -1,0 +1,47 @@
+{% extends "admin/index.html" %}
+
+{% block content %}
+<div id="content-main">
+    <div class="module" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; margin-bottom: 20px; border-radius: 8px;">
+        <h2 style="margin: 0; color: white;">Welcome to Stationery World Uganda Administration</h2>
+        <p style="margin: 10px 0 0 0; color: white; opacity: 0.9;">Manage your stationery business with ease</p>
+    </div>
+    
+    {% if app_list %}
+        <div class="app-list">
+            {% for app in app_list %}
+                <div class="app-{{ app.app_label }} module">
+                    <table>
+                        <caption>
+                            <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>
+                        </caption>
+                        {% for model in app.models %}
+                            <tr class="model-{{ model.object_name|lower }}">
+                                {% if model.admin_url %}
+                                    <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+                                {% else %}
+                                    <th scope="row">{{ model.name }}</th>
+                                {% endif %}
+
+                                {% if model.add_url %}
+                                    <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
+                                {% else %}
+                                    <td>&nbsp;</td>
+                                {% endif %}
+
+                                {% if model.admin_url %}
+                                    <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
+                                {% else %}
+                                    <td>&nbsp;</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>{% trans "You don't have permission to edit anything." %}</p>
+    {% endif %}
+</div>
+{% endblock %}

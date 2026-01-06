@@ -1,0 +1,80 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Payment Pending - Stationery World{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-warning">
+                <div class="card-header bg-warning text-dark">
+                    <h3 class="mb-0">
+                        <i class="fas fa-clock"></i> Payment Pending
+                    </h3>
+                </div>
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-clock text-warning" style="font-size: 4rem;"></i>
+                    </div>
+                    
+                    <h4>Payment is Being Processed</h4>
+                    <p class="lead">Your payment is currently being processed. You'll receive updates soon.</p>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6 text-start">
+                            <strong>Transaction Details:</strong><br>
+                            Transaction ID: {{ payment.transaction_id }}<br>
+                            Amount: UGX {{ payment.amount }}<br>
+                            Payment Method: {{ payment.payment_method.name }}<br>
+                            Status: {{ payment.get_status_display }}<br>
+                            Date: {{ payment.created_at|date:"F j, Y g:i A" }}
+                        </div>
+                        <div class="col-md-6 text-start">
+                            <strong>Order Details:</strong><br>
+                            Product: {{ payment.order.product.name }}<br>
+                            Quantity: {{ payment.order.quantity }}<br>
+                            Customer: {{ payment.order.customer_name }}<br>
+                            Phone: {{ payment.order.customer_phone }}
+                        </div>
+                    </div>
+
+                    {% if payment.payment_method.provider == 'bank' %}
+                        <div class="alert alert-info mt-4">
+                            <h5><i class="fas fa-university"></i> Bank Transfer Pending</h5>
+                            <p>Please complete your bank transfer using the details provided on the payment page.</p>
+                            <p><strong>Don't forget to include your transaction ID as reference!</strong></p>
+                            <p>Once we receive your transfer confirmation, we'll process your order immediately.</p>
+                        </div>
+                    {% elif payment.payment_method.provider == 'cash' %}
+                        <div class="alert alert-success mt-4">
+                            <h5><i class="fas fa-money-bill-wave"></i> Cash on Delivery</h5>
+                            <p>Your order has been confirmed for cash on delivery.</p>
+                            <p>We'll contact you shortly to arrange delivery details.</p>
+                            <p><strong>Please prepare UGX {{ payment.amount }} for payment upon delivery.</strong></p>
+                        </div>
+                    {% endif %}
+
+                    <div class="alert alert-secondary mt-4">
+                        <strong>Need Help?</strong><br>
+                        If you have any questions about your payment or order, please contact us:
+                        <div class="mt-2">
+                            <i class="fas fa-phone"></i> <a href="tel:+256700123456">+256 700 123 456</a><br>
+                            <i class="fas fa-envelope"></i> <a href="mailto:support@stationeryworld.com">support@stationeryworld.com</a><br>
+                            <i class="fab fa-whatsapp"></i> <a href="https://wa.me/256700123456" target="_blank">WhatsApp Chat</a>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="{% url 'home' %}" class="btn btn-primary me-2">
+                            <i class="fas fa-home"></i> Back to Home
+                        </a>
+                        <a href="{% url 'products' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-shopping-bag"></i> Continue Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

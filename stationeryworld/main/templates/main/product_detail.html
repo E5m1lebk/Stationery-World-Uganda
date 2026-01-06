@@ -1,0 +1,56 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row">
+    <!-- Product Images Carousel -->
+    <div class="col-md-6">
+      {% if product.images.all %}
+        <div id="carousel{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            {% for img in product.images.all %}
+              <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ img.image.url }}" class="d-block w-100 rounded shadow" alt="{{ product.name }}" style="height:400px; object-fit:cover;">
+              </div>
+            {% endfor %}
+          </div>
+          {% if product.images.all|length > 1 %}
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+          {% endif %}
+        </div>
+      {% else %}
+        <img src="{% static 'main/images/no-image.svg' %}" class="d-block w-100 rounded shadow" style="height:400px; object-fit:cover;" alt="No image available">
+      {% endif %}
+    </div>
+
+    <!-- Product Info -->
+    <div class="col-md-6">
+      <h2>{{ product.name }}</h2>
+      <p>{{ product.description }}</p>
+      <h4 class="fw-bold text-primary">UGX {{ product.price }}</h4>
+
+      <form method="post" action="/order/">
+        {% csrf_token %}
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+        <div class="mb-3">
+          <label class="form-label">Quantity</label>
+          <input type="number" name="quantity" value="1" min="1" class="form-control">
+        </div>
+        <div class="mb-3">
+          <input type="text" name="customer_name" class="form-control" placeholder="Your Name" required>
+        </div>
+        <div class="mb-3">
+          <input type="tel" name="customer_phone" class="form-control" placeholder="e.g. +256700123456" pattern="^\+?\d{9,15}$" required>
+        </div>
+        <button class="btn btn-brand w-100">Order Now</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,134 @@
+/* Font Face Declarations for Stationery World */
+
+/* Nexa Font Family */
+@font-face {
+    font-family: 'Nexa';
+    src: url('nexa/Nexa-Book.woff2') format('woff2'),
+         url('nexa/Nexa-Book.woff') format('woff'),
+         url('nexa/Nexa-Book.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Nexa';
+    src: url('nexa/Nexa-Bold.woff2') format('woff2'),
+         url('nexa/Nexa-Bold.woff') format('woff'),
+         url('nexa/Nexa-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Nexa';
+    src: url('nexa/Nexa-Light.woff2') format('woff2'),
+         url('nexa/Nexa-Light.woff') format('woff'),
+         url('nexa/Nexa-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Poppins Font Family */
+@font-face {
+    font-family: 'Poppins';
+    src: url('poppins/Poppins-Regular.woff2') format('woff2'),
+         url('poppins/Poppins-Regular.woff') format('woff'),
+         url('poppins/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('poppins/Poppins-Bold.woff2') format('woff2'),
+         url('poppins/Poppins-Bold.woff') format('woff'),
+         url('poppins/Poppins-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('poppins/Poppins-Light.woff2') format('woff2'),
+         url('poppins/Poppins-Light.woff') format('woff'),
+         url('poppins/Poppins-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('poppins/Poppins-Medium.woff2') format('woff2'),
+         url('poppins/Poppins-Medium.woff') format('woff'),
+         url('poppins/Poppins-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('poppins/Poppins-SemiBold.woff2') format('woff2'),
+         url('poppins/Poppins-SemiBold.woff') format('woff'),
+         url('poppins/Poppins-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Montserrat Font Family */
+@font-face {
+    font-family: 'Montserrat';
+    src: url('montserrat/Montserrat-Regular.woff2') format('woff2'),
+         url('montserrat/Montserrat-Regular.woff') format('woff'),
+         url('montserrat/Montserrat-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('montserrat/Montserrat-Bold.woff2') format('woff2'),
+         url('montserrat/Montserrat-Bold.woff') format('woff'),
+         url('montserrat/Montserrat-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('montserrat/Montserrat-Light.woff2') format('woff2'),
+         url('montserrat/Montserrat-Light.woff') format('woff'),
+         url('montserrat/Montserrat-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('montserrat/Montserrat-Medium.woff2') format('woff2'),
+         url('montserrat/Montserrat-Medium.woff') format('woff'),
+         url('montserrat/Montserrat-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('montserrat/Montserrat-SemiBold.woff2') format('woff2'),
+         url('montserrat/Montserrat-SemiBold.woff') format('woff'),
+         url('montserrat/Montserrat-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}

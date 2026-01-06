@@ -1,0 +1,63 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Cash on Delivery Confirmation - {{ order.product.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h3><i class="fas fa-check-circle"></i> Cash on Delivery Order Confirmation</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>Order Details</h5>
+                            <strong>Product:</strong> {{ order.product.name }}<br>
+                            <strong>Quantity:</strong> {{ order.quantity }}<br>
+                            <strong>Unit Price:</strong> UGX {{ order.product.price }}<br>
+                            <strong>Payment Method:</strong> {{ payment_method.name }}<br>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <h5>Total Amount</h5>
+                            <h3 class="text-success">UGX {{ total_amount }}</h3>
+                            <small class="text-muted">Payment due upon delivery</small>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <h6><i class="fas fa-info-circle"></i> How Cash on Delivery Works</h6>
+                        <ul class="mb-0">
+                            <li>Your order has been confirmed</li>
+                            <li>Our delivery team will contact you to arrange delivery</li>
+                            <li>Payment of <strong>UGX {{ total_amount }}</strong> will be collected upon delivery</li>
+                            <li>You can pay with cash or mobile money at your door</li>
+                            <li>Please have the exact amount ready when possible</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <h6><i class="fas fa-phone"></i> Contact Information</h6>
+                        <p class="mb-1"><strong>Customer:</strong> {{ order.customer_name }}</p>
+                        <p class="mb-1"><strong>Phone:</strong> {{ order.customer_phone }}</p>
+                        <p class="mb-0">We will contact you to confirm delivery details within 24 hours.</p>
+                    </div>
+
+                    <form method="POST" action="{% url 'create_payment' order.id %}">
+                        {% csrf_token %}
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-check"></i> Confirm Order for Cash on Delivery
+                            </button>
+                            <a href="{% url 'products' %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Products
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

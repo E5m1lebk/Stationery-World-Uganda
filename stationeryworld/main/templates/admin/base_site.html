@@ -1,0 +1,63 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}Stationery World Uganda - Admin{% endblock %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/admin_custom.css' %}">
+<style>
+/* Override default Django admin styles */
+#header {
+    background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 50%, #ffa726 100%) !important;
+    color: white !important;
+}
+
+#header h1 a {
+    color: white !important;
+    text-decoration: none;
+}
+
+.module {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.module caption {
+    background: #f8f9fa;
+    padding: 10px;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Navigation Global Styling */
+.nav-global {
+    float: right;
+    padding: 10px 0;
+}
+
+.nav-global a {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-left: 10px;
+    transition: background 0.3s ease;
+}
+
+.nav-global a:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+</style>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">
+        <span style="color: #ffffff;">Stationery World Uganda</span>
+        <span style="color: #ffffff; font-weight: normal; font-size: 16px;">Administration</span>
+    </a>
+</h1>
+{% endblock %}

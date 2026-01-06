@@ -1,0 +1,62 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Products - Stationery World Uganda | Quality Stationery, Electronics & Printing{% endblock %}
+
+{% block meta_description %}Browse our extensive collection of quality stationery supplies, electronics, phone accessories, and printing materials in Uganda. Competitive prices and fast delivery available.{% endblock %}
+
+{% block og_title %}Products - Stationery World Uganda | Quality Stationery, Electronics & Printing{% endblock %}
+{% block og_description %}Explore our wide range of stationery, electronics, phone accessories and printing materials. Quality products at competitive prices in Uganda.{% endblock %}
+{% block twitter_title %}Products - Stationery World Uganda | Quality Stationery, Electronics & Printing{% endblock %}
+{% block twitter_description %}Explore our wide range of stationery, electronics, phone accessories and printing materials. Quality products at competitive prices in Uganda.{% endblock %}
+{% load static %}
+
+{% block content %}
+<h2 class="mb-4" style="color: var(--brand-color);">Our Products</h2>
+<div class="row g-4">
+  {% for p in products %}
+    <div class="col-md-4">
+      <a href="{% url 'product_detail' p.id %}" style="text-decoration:none; color:inherit;">
+        <div class="card h-100 shadow-sm">
+
+          {% if p.image %}
+            <img src="{{ p.image.url }}" class="card-img-top" style="height:250px; object-fit:cover;" alt="{{ p.name }}">
+          {% elif p.images.all %}
+            {% for img in p.images.all %}
+              {% if forloop.first %}
+                <img src="{{ img.image.url }}" class="card-img-top" style="height:250px; object-fit:cover;" alt="{{ p.name }}">
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            <img src="{% static 'main/images/no-image.svg' %}" class="card-img-top" style="height:250px; object-fit:cover;" alt="No image available">
+          {% endif %}
+
+          <div class="card-body">
+            <h5 class="card-title">{{ p.name }}</h5>
+            <p class="fw-bold" style="color: var(--brand-color);">UGX {{ p.price }}</p>
+            <p class="card-text text-muted">{{ p.description|truncatewords:15 }}</p>
+            <form action="{% url 'order' %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="product_id" value="{{ p.id }}">
+              
+              <div class="mb-2">
+                <input type="text" name="customer_name" class="form-control form-control-sm" placeholder="Your name" required>
+              </div>
+              
+              <div class="mb-2">
+                <input type="tel" name="customer_phone" class="form-control form-control-sm" placeholder="Phone number" required>
+              </div>
+              
+              <div class="mb-2">
+                <input type="number" name="quantity" class="form-control form-control-sm" value="1" min="1" max="10" required>
+              </div>
+              
+              <button type="submit" class="btn btn-primary btn-sm mt-2 w-100">Add to Cart</button>
+            </form>
+          </div>
+
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

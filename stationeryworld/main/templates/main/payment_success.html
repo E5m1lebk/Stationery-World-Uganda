@@ -1,0 +1,58 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Payment Successful - Stationery World{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-check-circle"></i> Payment Successful!
+                    </h3>
+                </div>
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    
+                    <h4>Thank You for Your Payment!</h4>
+                    <p class="lead">Your payment has been processed successfully.</p>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6 text-start">
+                            <strong>Transaction Details:</strong><br>
+                            Transaction ID: {{ payment.transaction_id }}<br>
+                            Amount Paid: UGX {{ payment.amount }}<br>
+                            Payment Method: {{ payment.payment_method.name }}<br>
+                            Date: {{ payment.processed_at|date:"F j, Y g:i A" }}
+                        </div>
+                        <div class="col-md-6 text-start">
+                            <strong>Order Details:</strong><br>
+                            Product: {{ payment.order.product.name }}<br>
+                            Quantity: {{ payment.order.quantity }}<br>
+                            Customer: {{ payment.order.customer_name }}<br>
+                            Phone: {{ payment.order.customer_phone }}
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info mt-4">
+                        <strong>What's Next?</strong><br>
+                        You will receive a confirmation SMS/email shortly. Our team will contact you to confirm your order details and arrange delivery.
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="{% url 'home' %}" class="btn btn-primary me-2">
+                            <i class="fas fa-home"></i> Back to Home
+                        </a>
+                        <a href="{% url 'products' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-shopping-bag"></i> Continue Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
